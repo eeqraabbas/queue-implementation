@@ -1,0 +1,58 @@
+class Node:
+  def _init_(self, data):
+    self.data = data
+    self.next = None
+
+
+class LinkedList:
+  def _init_(self):
+    self.head = None
+
+  def push_back(self, new_Element):
+     new_Node = Node(new_Element)
+     if(self.head == None):
+      self.head = new_Node
+      return
+     else:
+      temp = self.head
+      while(temp.next != None):
+        temp = temp.next
+      temp.next = new_Node
+
+  def push_at(self, new_Element, position):     
+    new_Node = Node(new_Element) 
+    if(position < 1):
+      print("\nposition should be >= 1.")
+    elif (position == 1):
+      new_Node.next = self.head
+      self.head = new_Node
+    else:    
+      temp = self.head
+      for i in range(1, position-1):
+        if(temp != None):
+          temp = temp.next   
+      if(temp != None):
+        new_Node.next = temp.next
+        temp.next = new_Node  
+      else:
+        print("\nThe previous node is null.")
+
+  def PrintList(self):
+    temp = self.head
+    if(temp != None):
+      print("The list contains:", end=" ")
+      while (temp != None):
+        print(temp.data, end=" ")
+        temp = temp.next
+      print()
+    else:
+      print("The list is empty.")
+
+My_List = LinkedList()
+My_List.push_back(45)
+My_List.push_back(64)
+My_List.PrintList()
+My_List.push_at(60, 7)
+My_List.PrintList()
+My_List.push_at(95, 7)
+My_List.PrintList()
